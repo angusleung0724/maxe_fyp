@@ -5,6 +5,17 @@ cmake_minimum_required (VERSION 3.8)
 
 # Add source to this project's executable.
 add_executable (TheSimulator
+	"AngusAgents/Fundamental.cpp"
+	"AngusAgents/Fundamental.h"
+	"AngusAgents/MarketMaker.cpp"
+	"AngusAgents/MarketMaker.h"
+	"AngusAgents/Momentum.cpp"
+	"AngusAgents/Momentum.h"
+	"AngusAgents/Noise.cpp"
+	"AngusAgents/Noise.h"
+	"AngusAgents/ExchangePopulator.cpp"
+	"AngusAgents/ExchangePopulator.h"
+
 	"AdaptiveOfferingAgent.cpp"
 	"AdaptiveOfferingAgent.h"
 	"Agent.cpp"
@@ -50,8 +61,8 @@ add_executable (TheSimulator
 	"PriorityProRataBook.h"
 	"PureProRataBook.h"
 	"PureProRataBook.cpp"
-	"PythonAgent.h"
-	"PythonAgent.cpp"
+	# "PythonAgent.h"
+	# "PythonAgent.cpp"
 	"RandomWalkMarketMakerAgent.h"
 	"RandomWalkMarketMakerAgent.cpp"
 	"SetupAgent.cpp"

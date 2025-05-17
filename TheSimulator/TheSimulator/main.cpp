@@ -8,9 +8,9 @@
 #include "pugi/pugixml.hpp"
 #include "dimcli/cli.h"
 
-#include <pybind11/embed.h> // everything needed for embedding
-#include <pybind11/stl.h> // MUST BE
-namespace py = pybind11;
+// #include <pybind11/embed.h> // everything needed for embedding
+// #include <pybind11/stl.h> // MUST BE
+// namespace py = pybind11;
 
 static bool silent = false;
 void trace(const std::string& msg);
@@ -23,11 +23,11 @@ void runSimulations(std::pair<unsigned int, unsigned int> runIndexRange, bool in
 
 int main(int argc, char* argv[]) {
 	// start the interpreter and keep it alive
-	py::scoped_interpreter guard {};
+	// py::scoped_interpreter guard {};
 
 	// handle the command line argument parsing
 	Dim::Cli cli;
-	auto& simulationFile = cli.opt<std::string>("f file [file]", "Simulation.xml").desc("the simulation file to be used");
+	auto& simulationFile = cli.opt<std::string>("f file [file]", "./TheSimulator/SimulationExample.xml").desc("the simulation file to be used");
 	auto& interactive = cli.opt<bool>("i interactive", false).desc("runs the simulation in the interactive mode");
 	auto& silencio = cli.opt<bool>("s silent", false).desc("supresses all verbose trace output, error traces remain enabled");
 	auto& runCount = cli.opt<unsigned int>("r runs", 1).desc("Number of times the simulation is to be run");
@@ -71,7 +71,7 @@ int main(int argc, char* argv[]) {
 
 	// parse the simulation configuration file
 	pugi::xml_document doc;
-	auto parse_result = doc.load_file(simulationFile->c_str());
+	pugi::xml_parse_result parse_result = doc.load_file(simulationFile->c_str());
 	if (!parse_result) {
 		etraceLine(" - error: could not parse the file '" + (*simulationFile) + "'");
 		return 1;

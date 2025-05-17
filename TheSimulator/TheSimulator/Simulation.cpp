@@ -10,7 +10,10 @@
 #include "AdaptiveOfferingAgent.h"
 #include "RandomWalkMarketMakerAgent.h"
 #include "DoobAgent.h"
-#include "PythonAgent.h"
+#include "AngusAgents/Noise.h"
+#include "AngusAgents/ExchangePopulator.h"
+
+// #include "PythonAgent.h"
 
 #include <algorithm>
 #include <filesystem>
@@ -170,37 +173,46 @@ void Simulation::setupChildConfiguration(const pugi::xml_node& node, const std::
 			auto eaptr = std::make_unique<DoobAgent>(this);
 			eaptr->configure(*nit, configurationPath);
 			m_agentList.push_back(std::move(eaptr));
+		} else if (nodeName == "NoiseAgent") {
+			auto eaptr = std::make_unique<NoiseAgent>(this);
+			eaptr->configure(*nit, configurationPath);
+			m_agentList.push_back(std::move(eaptr));
+		} else if (nodeName == "ExchangePopulator") {
+			auto eaptr = std::make_unique<ExchangePopulator>(this);
+			eaptr->configure(*nit, configurationPath);
+			m_agentList.push_back(std::move(eaptr));
+		} else if (nodeName == "PythonAgent") {
 		} else {
-			pugi::xml_attribute att = node.attribute("file");
-			if (!att.empty()) {
-				std::string filePath = att.as_string();
-				if (!std::filesystem::exists(filePath)) {
-					throw SimulationException("Simulation::configure(): unrecognized node '" 
-						+ nodeName 
-						+ "', tried looking into the file '"
-						+ filePath
-						+ "', but it does not exist"
-					);
-				} else {
-					auto eaptr = std::make_unique<PythonAgent>(this, nodeName, filePath);
-					eaptr->configure(*nit, configurationPath);
-					m_agentList.push_back(std::move(eaptr));
-				}
-			} else {
-				std::string filePath = nodeName + ".py";
-				if (!std::filesystem::exists(filePath)) {
-					throw SimulationException("Simulation::configure(): unrecognized node '"
-						+ nodeName
-						+ "', tried looking into the file '"
-						+ filePath
-						+ "', but it does not exist"
-					);
-				} else {
-					auto eaptr = std::make_unique<PythonAgent>(this, nodeName, "");
-					eaptr->configure(*nit, configurationPath);
-					m_agentList.push_back(std::move(eaptr));
-				}
-			}
+		// 	pugi::xml_attribute att = node.attribute("file");
+		// 	if (!att.empty()) {
+		// 		std::string filePath = att.as_string();
+		// 		if (!std::filesystem::exists(filePath)) {
+		// 			throw SimulationException("Simulation::configure(): unrecognized node '" 
+		// 				+ nodeName 
+		// 				+ "', tried looking into the file '"
+		// 				+ filePath
+		// 				+ "', but it does not exist"
+		// 			);
+		// 		} else {
+		// 			auto eaptr = std::make_unique<PythonAgent>(this, nodeName, filePath);
+		// 			eaptr->configure(*nit, configurationPath);
+		// 			m_agentList.push_back(std::move(eaptr));
+		// 		}
+		// 	} else {
+		// 		std::string filePath = nodeName + ".py";
+		// 		if (!std::filesystem::exists(filePath)) {
+		// 			throw SimulationException("Simulation::configure(): unrecognized node '"
+		// 				+ nodeName
+		// 				+ "', tried looking into the file '"
+		// 				+ filePath
+		// 				+ "', but it does not exist"
+		// 			);
+		// 		} else {
+		// 			auto eaptr = std::make_unique<PythonAgent>(this, nodeName, "");
+		// 			eaptr->configure(*nit, configurationPath);
+		// 			m_agentList.push_back(std::move(eaptr));
+		// 		}
+		// 	}
 		}
 	}
 
