@@ -17,6 +17,7 @@
 
 #include <algorithm>
 #include <filesystem>
+#include <sstream>
 
 #include "SimulationException.h"
 #include "ParameterStorage.h"
@@ -174,9 +175,16 @@ void Simulation::setupChildConfiguration(const pugi::xml_node& node, const std::
 			eaptr->configure(*nit, configurationPath);
 			m_agentList.push_back(std::move(eaptr));
 		} else if (nodeName == "NoiseAgent") {
-			auto eaptr = std::make_unique<NoiseAgent>(this);
-			eaptr->configure(*nit, configurationPath);
-			m_agentList.push_back(std::move(eaptr));
+			for (int i = 0; i < 100; ++i) {
+				auto eaptr = std::make_unique<NoiseAgent>(this);
+				pugi::xml_attribute attr = nit->attribute("name");
+				std::stringstream ss;
+				ss << attr.value() << i;
+				attr.set_value(ss.str().c_str());
+				
+				eaptr->configure(*nit, configurationPath);
+				m_agentList.push_back(std::move(eaptr));
+			}
 		} else if (nodeName == "ExchangePopulator") {
 			auto eaptr = std::make_unique<ExchangePopulator>(this);
 			eaptr->configure(*nit, configurationPath);

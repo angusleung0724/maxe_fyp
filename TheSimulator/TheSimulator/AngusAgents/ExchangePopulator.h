@@ -23,3 +23,4 @@ private:
     uint64_t num_levels_both_sides;
     double level_spacing;
 };
+

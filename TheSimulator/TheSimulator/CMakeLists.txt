@@ -15,6 +15,8 @@ add_executable (TheSimulator
 	"AngusAgents/Noise.h"
 	"AngusAgents/ExchangePopulator.cpp"
 	"AngusAgents/ExchangePopulator.h"
+	"AngusAgents/DownwardShock.cpp"
+	"AngusAgents/DownwardShock.h"
 
 	"AdaptiveOfferingAgent.cpp"
 	"AdaptiveOfferingAgent.h"

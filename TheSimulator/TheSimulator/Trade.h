@@ -25,6 +25,7 @@ public:
 	inline OrderID restingOrderID() const { return m_restingOrderID; }
 	inline Volume volume() const { return m_volume; }
 	inline Money price() const { return m_price; }
+	inline OrderDirection direction() const { return m_direction; }
 
 	void printHuman() const override;
 	void printCSV() const override;

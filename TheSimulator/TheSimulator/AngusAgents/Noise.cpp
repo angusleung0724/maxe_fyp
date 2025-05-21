@@ -2,6 +2,7 @@
 #include "../Simulation.h"
 #include "../SimulationException.h"
 #include "../ParameterStorage.h"
+#include <limits>
 
 
 NoiseAgent::NoiseAgent(const Simulation* simulation)
@@ -48,9 +49,7 @@ void NoiseAgent::receiveMessage(const MessagePtr& msg) {
 
 
     if (msg->type == "EVENT_SIMULATION_START") {
-        for (uint64_t i = 0; i < num_noise_traders; ++i) {
-            simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_NOISE", std::make_shared<EmptyPayload>());
-        }
+        simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_NOISE", std::make_shared<EmptyPayload>());
     } else if (msg->type == "WAKEUP_FOR_NOISE") {
         simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "RETRIEVE_L1", std::make_shared<EmptyPayload>());  
     } else if (msg->type == "RESPONSE_RETRIEVE_L1") {
@@ -61,7 +60,7 @@ void NoiseAgent::receiveMessage(const MessagePtr& msg) {
         for (auto& id: outstanding_orders) {
             if (uniform_dist(simulation()->randomGenerator()) < cancel_probability) {
                 // Max unsigned int so we don't need to specify a volume
-                cancel_payload->cancellations.push_back(CancelOrdersCancellation(id, UINT_MAX));
+                cancel_payload->cancellations.push_back(CancelOrdersCancellation(id, std::numeric_limits<unsigned int>::max()));
             }
         }
 
@@ -84,11 +83,11 @@ void NoiseAgent::receiveMessage(const MessagePtr& msg) {
             if (uniform_dist(simulation()->randomGenerator()) < 0.5) {
                 // Buy market order
                 auto marketpayload = std::make_shared<PlaceOrderMarketPayload>(OrderDirection::Buy, DEFAULT_ORDER_VOLUME);
-                simulation()->dispatchMessage(currentTimestamp, 2, name(), exchange_1, "PLACE_ORDER_MARKET", marketpayload);
+                simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "PLACE_ORDER_MARKET", marketpayload);
             } else {
                 // Sell market order
                 auto marketpayload = std::make_shared<PlaceOrderMarketPayload>(OrderDirection::Sell, DEFAULT_ORDER_VOLUME);
-                simulation()->dispatchMessage(currentTimestamp, 2, name(), exchange_1, "PLACE_ORDER_MARKET", marketpayload);
+                simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "PLACE_ORDER_MARKET", marketpayload);
             }
         }
         
@@ -96,16 +95,16 @@ void NoiseAgent::receiveMessage(const MessagePtr& msg) {
             if (uniform_dist(simulation()->randomGenerator()) < 0.5) {
                 // Buy limit order
                 auto limitpayload = std::make_shared<PlaceOrderLimitPayload>(OrderDirection::Buy, DEFAULT_ORDER_VOLUME, price_per_unit - DEFAULT_OFFSET_FOR_LIMIT);
-                simulation()->dispatchMessage(currentTimestamp, 2, name(), exchange_1, "PLACE_ORDER_LIMIT", limitpayload);
+                simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "PLACE_ORDER_LIMIT", limitpayload);
             } else {
                 // Sell limit order
                 auto limitpayload = std::make_shared<PlaceOrderLimitPayload>(OrderDirection::Sell, DEFAULT_ORDER_VOLUME, price_per_unit + DEFAULT_OFFSET_FOR_LIMIT);
-                simulation()->dispatchMessage(currentTimestamp, 2, name(), exchange_1, "PLACE_ORDER_LIMIT", limitpayload);
+                simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "PLACE_ORDER_LIMIT", limitpayload);
             }
         }        
 
         // Get new price information for loop to trade continuously
-        simulation()->dispatchMessage(currentTimestamp, 2, name(), exchange_1, "RETRIEVE_L1", std::make_shared<EmptyPayload>());  
+        simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "RETRIEVE_L1", std::make_shared<EmptyPayload>());  
 
 
     } else if (msg->type == "RESPONSE_PLACE_ORDER_LIMIT") {
@@ -118,6 +117,16 @@ void NoiseAgent::receiveMessage(const MessagePtr& msg) {
             if (it != outstanding_orders.end()) {
                 outstanding_orders.erase(it);
             }
+        }
+    } else if (msg->type == "RESPONSE_TRADE") {
+        auto pptr = std::dynamic_pointer_cast<EventTradePayload>(msg->payload);
+        auto it = std::find(outstanding_orders.begin(), outstanding_orders.end(), pptr->trade.aggressingOrderID());
+        if (it != outstanding_orders.end()) {
+            outstanding_orders.erase(it);
+        }
+        auto it2 = std::find(outstanding_orders.begin(), outstanding_orders.end(), pptr->trade.restingOrderID());
+        if (it2 != outstanding_orders.end()) {
+            outstanding_orders.erase(it2);
         }
     }
 }
