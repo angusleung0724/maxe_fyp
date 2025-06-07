@@ -1,0 +1,1007 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<Simulation start="0" duration="1000">
+    <ExchangeAgent                      
+        name="MARKET1"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET2"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET3"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET4"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET5"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET6"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET7"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET8"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET9"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET10"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET11"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET12"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET13"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET14"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET15"
+        algorithm="PriceTime"           
+        />
+    <ExchangeAgent                      
+        name="MARKET16"
+        algorithm="PriceTime"           
+        />
+
+
+    <MomentumAgent
+        name="SHORT_MOMENTUM_AGENT_1"                 
+        exchange_1="MARKET1"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"   
+        num_momentum_traders="100"
+        demand_saturation="9.0"
+        alpha="0.7"
+        beta="0.02"
+        
+        />
+    <MomentumAgent
+        name="LONG_MOMENTUM_AGENT_1"                 
+        exchange_1="MARKET1"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_momentum_traders="100"
+        demand_saturation="5.0"
+        alpha="0.002"
+        beta="0.001"
+        />
+    
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_1"                          
+        exchange_1="MARKET1"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_1"                      
+        exchange_1="MARKET1" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_1"
+        exchange_1="MARKET1"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_1"                      
+        exchange_1="MARKET1"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_1"
+        exchange="MARKET1"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_1"
+        exchange="MARKET1"
+        />
+
+
+
+    <MomentumAgent
+        name="SHORT_MOMENTUM_AGENT_2"                 
+        exchange_1="MARKET2"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"   
+        num_momentum_traders="100"
+        demand_saturation="9.0"
+        alpha="0.7"
+        beta="0.02"
+        
+        />
+    <MomentumAgent
+        name="LONG_MOMENTUM_AGENT_2"                 
+        exchange_1="MARKET2"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_momentum_traders="100"
+        demand_saturation="5.0"
+        alpha="0.002"
+        beta="0.001"
+        />
+    
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_2"                          
+        exchange_1="MARKET2"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_2"                      
+        exchange_1="MARKET2" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_2"
+        exchange_1="MARKET2"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_2"                      
+        exchange_1="MARKET2"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_2"
+        exchange="MARKET2"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_2"
+        exchange="MARKET2"
+        />
+
+    <MomentumAgent
+        name="SHORT_MOMENTUM_AGENT_3"                 
+        exchange_1="MARKET3"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"   
+        num_momentum_traders="100"
+        demand_saturation="9.0"
+        alpha="0.7"
+        beta="0.02"
+        
+        />
+    <MomentumAgent
+        name="LONG_MOMENTUM_AGENT_3"                 
+        exchange_1="MARKET3"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_momentum_traders="100"
+        demand_saturation="5.0"
+        alpha="0.002"
+        beta="0.001"
+        />
+    
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_3"                          
+        exchange_1="MARKET3"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_3"                      
+        exchange_1="MARKET3" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_3"
+        exchange_1="MARKET3"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_3"                      
+        exchange_1="MARKET3"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_3"
+        exchange="MARKET3"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_3"
+        exchange="MARKET3"
+        />
+    
+    <MomentumAgent
+        name="SHORT_MOMENTUM_AGENT_4"                 
+        exchange_1="MARKET4"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"   
+        num_momentum_traders="100"
+        demand_saturation="9.0"
+        alpha="0.7"
+        beta="0.02"
+        
+        />
+    <MomentumAgent
+        name="LONG_MOMENTUM_AGENT_4"                 
+        exchange_1="MARKET4"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_momentum_traders="100"
+        demand_saturation="5.0"
+        alpha="0.002"
+        beta="0.001"
+        />
+    
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_4"                          
+        exchange_1="MARKET4"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_4"                      
+        exchange_1="MARKET4" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_4"
+        exchange_1="MARKET4"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_4"                      
+        exchange_1="MARKET4"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_4"
+        exchange="MARKET4"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_4"
+        exchange="MARKET4"
+        />
+
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_5"                          
+        exchange_1="MARKET5"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_5"                      
+        exchange_1="MARKET5" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_5"
+        exchange_1="MARKET5"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_5"                      
+        exchange_1="MARKET5"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_5"
+        exchange="MARKET5"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_5"
+        exchange="MARKET5"
+        />
+
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_6"                          
+        exchange_1="MARKET6"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_6"                      
+        exchange_1="MARKET6" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_6"
+        exchange_1="MARKET6"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_6"                      
+        exchange_1="MARKET6"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_6"
+        exchange="MARKET6"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_6"
+        exchange="MARKET6"
+        />
+
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_7"                          
+        exchange_1="MARKET7"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_7"                      
+        exchange_1="MARKET7" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_7"
+        exchange_1="MARKET7"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_7"                      
+        exchange_1="MARKET7"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_7"
+        exchange="MARKET7"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_7"
+        exchange="MARKET7"
+        />
+
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_8"                          
+        exchange_1="MARKET8"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_8"                      
+        exchange_1="MARKET8" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_8"
+        exchange_1="MARKET8"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_8"                      
+        exchange_1="MARKET8"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_8"
+        exchange="MARKET8"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_8"
+        exchange="MARKET8"
+        />
+
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_9"                          
+        exchange_1="MARKET9"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_9"                      
+        exchange_1="MARKET9" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_9"
+        exchange_1="MARKET9"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_9"                      
+        exchange_1="MARKET9"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_9"
+        exchange="MARKET9"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_9"
+        exchange="MARKET9"
+        />
+
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_10"                          
+        exchange_1="MARKET10"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_10"                      
+        exchange_1="MARKET10" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_10"
+        exchange_1="MARKET10"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_10"                      
+        exchange_1="MARKET10"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_10"
+        exchange="MARKET10"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_10"
+        exchange="MARKET10"
+        />
+
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_11"                          
+        exchange_1="MARKET11"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_11"                      
+        exchange_1="MARKET11" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_11"
+        exchange_1="MARKET11"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_11"                      
+        exchange_1="MARKET11"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_11"
+        exchange="MARKET11"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_11"
+        exchange="MARKET11"
+        />
+
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_12"                          
+        exchange_1="MARKET12"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_12"                      
+        exchange_1="MARKET12" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_12"
+        exchange_1="MARKET12"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_12"                      
+        exchange_1="MARKET12"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_12"
+        exchange="MARKET12"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_12"
+        exchange="MARKET12"
+        />
+
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_13"                          
+        exchange_1="MARKET13"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_13"                      
+        exchange_1="MARKET13" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_13"
+        exchange_1="MARKET13"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_13"                      
+        exchange_1="MARKET13"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_13"
+        exchange="MARKET13"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_13"
+        exchange="MARKET13"
+        />
+
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_14"                          
+        exchange_1="MARKET14"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_14"                      
+        exchange_1="MARKET14" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_14"
+        exchange_1="MARKET14"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_14"                      
+        exchange_1="MARKET14"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_14"
+        exchange="MARKET14"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_14"
+        exchange="MARKET14"
+        />
+
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_15"                          
+        exchange_1="MARKET15"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_15"                      
+        exchange_1="MARKET15" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_15"
+        exchange_1="MARKET15"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_15"                      
+        exchange_1="MARKET15"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_15"
+        exchange="MARKET15"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_15"
+        exchange="MARKET15"
+        />
+
+    <FundamentalAgent
+        name="FUNDAMENTAL_AGENT_16"                          
+        exchange_1="MARKET16"
+        fundamental_value_expectation="50.0"
+        fundamental_value_std="5.0"
+        k1="5.0"
+        k2="0.02"
+        num_fundamental_traders="100"
+        />
+    
+    <MarketMakerAgent
+        name="MARKET_MAKER_AGENT_16"                      
+        exchange_1="MARKET16" 
+        num_market_makers="100"
+        limit_order_probability="0.6"
+        cancel_probability="0.2"
+        restart_interval="20"
+        spread="0.5"
+        max_risk="300"          
+        />
+    
+    <NoiseAgent
+        name="NOISE_AGENT_16"
+        exchange_1="MARKET16"
+        cancel_probability="0.3"
+        market_to_limit_ratio="5.0"
+        num_noise_traders="100"
+        sigma="0.6"          
+        />
+    
+    <DownwardShockAgent
+        name="DOWNWARD_SHOCK_AGENT_16"                      
+        exchange_1="MARKET16"  
+        spike_probability="0.8"
+        volume_per_order="400"
+        start_tick="500"
+        end_tick="550"
+        />
+
+    <ExchangePopulator
+        name="EXCHANGE_POPULATOR_16"
+        exchange="MARKET16"
+        initial_price="50.0"
+        quantity_per_level="400"
+        num_levels_both_sides="500"
+        level_spacing="0.1"
+        />
+
+    <TradeLogAgent                      
+        name="LOGGER_TRADE_16"
+        exchange="MARKET16"
+        />
+        
+</Simulation>

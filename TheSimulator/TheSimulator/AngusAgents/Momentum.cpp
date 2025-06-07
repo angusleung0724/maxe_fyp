@@ -32,12 +32,16 @@ void MomentumAgent::configure(const pugi::xml_node& node, const std::string& con
         num_momentum_traders = std::stoull(simulation()->parameters().processString(att.as_string()));
     }
 
-    if (!(att = node.attribute("momentum_signal")).empty()) {
-        momentum_signal = std::stod(simulation()->parameters().processString(att.as_string()));
+    if (!(att = node.attribute("alpha")).empty()) {
+        alpha = std::stod(simulation()->parameters().processString(att.as_string()));
+    }   
+
+    if (!(att = node.attribute("beta")).empty()) {
+        beta = std::stod(simulation()->parameters().processString(att.as_string()));
     }
 
-    if (!(att = node.attribute("previous_price")).empty()) {
-        previous_price = std::stod(simulation()->parameters().processString(att.as_string()));
+    if (!(att = node.attribute("demand_saturation")).empty()) {
+        demand_saturation = std::stod(simulation()->parameters().processString(att.as_string()));
     }
 
     std::cout << "MomentumAgent: " << name() << " configured with exchange_1: " << exchange_1
@@ -53,7 +57,9 @@ void MomentumAgent::receiveMessage(const MessagePtr& msg) {
     const Timestamp currentTimestamp = simulation()->currentTimestamp();
 
     if (msg->type == "EVENT_SIMULATION_START") {
-        simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_MOMENTUM", std::make_shared<EmptyPayload>());
+        for (int i = 0; i < 1; ++i) {
+            simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_MOMENTUM", std::make_shared<EmptyPayload>());
+        }
     } else if (msg->type == "WAKEUP_FOR_MOMENTUM") {
         simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "RETRIEVE_L1", std::make_shared<EmptyPayload>());  
     } else if (msg->type == "RESPONSE_RETRIEVE_L1") {
@@ -109,6 +115,9 @@ void MomentumAgent::receiveMessage(const MessagePtr& msg) {
             }
             
         }
+
+        // Poll for L1 again
+        simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "RETRIEVE_L1", std::make_shared<EmptyPayload>());
 
     } else if (msg->type == "RESPONSE_PLACE_ORDER_LIMIT") {
         auto pptr = std::dynamic_pointer_cast<PlaceOrderLimitResponsePayload>(msg->payload);

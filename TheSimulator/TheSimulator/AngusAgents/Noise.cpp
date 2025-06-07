@@ -49,7 +49,9 @@ void NoiseAgent::receiveMessage(const MessagePtr& msg) {
 
 
     if (msg->type == "EVENT_SIMULATION_START") {
-        simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_NOISE", std::make_shared<EmptyPayload>());
+        for (int i = 0; i < 1; ++i) {
+            simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_NOISE", std::make_shared<EmptyPayload>());
+        }
     } else if (msg->type == "WAKEUP_FOR_NOISE") {
         simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "RETRIEVE_L1", std::make_shared<EmptyPayload>());  
     } else if (msg->type == "RESPONSE_RETRIEVE_L1") {

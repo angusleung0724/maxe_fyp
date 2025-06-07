@@ -12,6 +12,10 @@
 #include "DoobAgent.h"
 #include "AngusAgents/Noise.h"
 #include "AngusAgents/ExchangePopulator.h"
+#include "AngusAgents/DownwardShock.h"
+#include "AngusAgents/Fundamental.h"
+#include "AngusAgents/MarketMaker.h"
+#include "AngusAgents/Momentum.h"
 
 // #include "PythonAgent.h"
 
@@ -123,6 +127,10 @@ void Simulation::stop() {
 }
 
 void Simulation::setupChildConfiguration(const pugi::xml_node& node, const std::string& configurationPath) {
+
+	// Change this to scale up population of agents without changing XML file (For experiments)
+	int population_scale = 1000;
+
 	for (pugi::xml_node_iterator nit = node.begin(); nit != node.end(); ++nit) {
 		std::string nodeName = nit->name();
 		if (nodeName == "Generator") {
@@ -175,13 +183,46 @@ void Simulation::setupChildConfiguration(const pugi::xml_node& node, const std::
 			eaptr->configure(*nit, configurationPath);
 			m_agentList.push_back(std::move(eaptr));
 		} else if (nodeName == "NoiseAgent") {
-			for (int i = 0; i < 100; ++i) {
+			for (int i = 0; i < population_scale; ++i) {
 				auto eaptr = std::make_unique<NoiseAgent>(this);
 				pugi::xml_attribute attr = nit->attribute("name");
 				std::stringstream ss;
 				ss << attr.value() << i;
 				attr.set_value(ss.str().c_str());
-				
+				eaptr->configure(*nit, configurationPath);
+				m_agentList.push_back(std::move(eaptr));
+			}
+		} else if (nodeName == "DownwardShockAgent") {
+			auto eaptr = std::make_unique<DownwardShockAgent>(this);
+			eaptr->configure(*nit, configurationPath);
+			m_agentList.push_back(std::move(eaptr));
+		} else if (nodeName == "FundamentalAgent") {
+			for (int i = 0; i < population_scale; ++i) {
+				auto eaptr = std::make_unique<FundamentalAgent>(this);
+				pugi::xml_attribute attr = nit->attribute("name");
+				std::stringstream ss;
+				ss << attr.value() << i;
+				attr.set_value(ss.str().c_str());
+				eaptr->configure(*nit, configurationPath);
+				m_agentList.push_back(std::move(eaptr));
+			}
+		} else if (nodeName == "MarketMakerAgent") {
+			for (int i = 0; i < population_scale; ++i) {
+				auto eaptr = std::make_unique<MarketMakerAgent>(this);
+				pugi::xml_attribute attr = nit->attribute("name");
+				std::stringstream ss;
+				ss << attr.value() << i;
+				attr.set_value(ss.str().c_str());
+				eaptr->configure(*nit, configurationPath);
+				m_agentList.push_back(std::move(eaptr));
+			}
+		} else if (nodeName == "MomentumAgent") {
+			for (int i = 0; i < population_scale; ++i) {
+				auto eaptr = std::make_unique<MomentumAgent>(this);
+				pugi::xml_attribute attr = nit->attribute("name");
+				std::stringstream ss;
+				ss << attr.value() << i;
+				attr.set_value(ss.str().c_str());
 				eaptr->configure(*nit, configurationPath);
 				m_agentList.push_back(std::move(eaptr));
 			}

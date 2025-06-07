@@ -39,13 +39,18 @@ void MarketMakerAgent::configure(const pugi::xml_node& node, const std::string& 
     if (!(att = node.attribute("max_risk")).empty()) {
         max_risk = std::stoull(simulation()->parameters().processString(att.as_string()));
     }
+    if (!(att = node.attribute("num_market_makers")).empty()) {
+        num_market_makers = std::stoull(simulation()->parameters().processString(att.as_string()));
+    }
 }
 
 void MarketMakerAgent::receiveMessage(const MessagePtr& msg) {
     const Timestamp currentTimestamp = simulation()->currentTimestamp();
 
     if (msg->type == "EVENT_SIMULATION_START") {
-        simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_MARKET_MAKER", std::make_shared<EmptyPayload>());
+        for (int i = 0; i < 1; ++i) {
+            simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_MARKET_MAKER", std::make_shared<EmptyPayload>());
+        }
     } else if (msg->type == "WAKEUP_FOR_MARKET_MAKER") {
         simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "RETRIEVE_L1", std::make_shared<EmptyPayload>());  
     } else if (msg->type == "RESPONSE_RETRIEVE_L1") {
@@ -99,6 +104,10 @@ void MarketMakerAgent::receiveMessage(const MessagePtr& msg) {
             }
         }
         restart_counter--;
+
+        // Poll for L1 again
+        simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "RETRIEVE_L1", std::make_shared<EmptyPayload>());
+        
     } else if (msg->type == "RESPONSE_PLACE_ORDER_LIMIT") {
         auto pptr = std::dynamic_pointer_cast<PlaceOrderLimitResponsePayload>(msg->payload);
         outstanding_orders.push_back(pptr->id);

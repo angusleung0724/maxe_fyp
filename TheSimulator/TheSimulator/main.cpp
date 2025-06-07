@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 
 	// handle the command line argument parsing
 	Dim::Cli cli;
-	auto& simulationFile = cli.opt<std::string>("f file [file]", "./TheSimulator/SimulationExample.xml").desc("the simulation file to be used");
+	auto& simulationFile = cli.opt<std::string>("f file [file]", "./TheSimulator/SimulationExample16.xml").desc("the simulation file to be used");
 	auto& interactive = cli.opt<bool>("i interactive", false).desc("runs the simulation in the interactive mode");
 	auto& silencio = cli.opt<bool>("s silent", false).desc("supresses all verbose trace output, error traces remain enabled");
 	auto& runCount = cli.opt<unsigned int>("r runs", 1).desc("Number of times the simulation is to be run");

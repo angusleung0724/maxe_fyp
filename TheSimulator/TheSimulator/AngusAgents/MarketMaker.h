@@ -25,6 +25,7 @@ class MarketMakerAgent : public Agent {
         uint64_t restart_interval;
         double spread;
         uint64_t max_risk;
+        uint64_t num_market_makers;
 
         bool exceeded_risk_threshold{false};
         uint64_t restart_counter{0};
