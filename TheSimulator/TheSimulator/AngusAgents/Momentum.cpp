@@ -44,22 +44,20 @@ void MomentumAgent::configure(const pugi::xml_node& node, const std::string& con
         demand_saturation = std::stod(simulation()->parameters().processString(att.as_string()));
     }
 
-    std::cout << "MomentumAgent: " << name() << " configured with exchange_1: " << exchange_1
-              << ", cancel_probability: " << cancel_probability
-              << ", market_to_limit_ratio: " << market_to_limit_ratio
-              << ", num_momentum_traders: " << num_momentum_traders
-              << ", momentum_signal: " << momentum_signal
-              << ", previous_price: " << previous_price
-              << std::endl;
+    // std::cout << "MomentumAgent: " << name() << " configured with exchange_1: " << exchange_1
+    //           << ", cancel_probability: " << cancel_probability
+    //           << ", market_to_limit_ratio: " << market_to_limit_ratio
+    //           << ", num_momentum_traders: " << num_momentum_traders
+    //           << ", momentum_signal: " << momentum_signal
+    //           << ", previous_price: " << previous_price
+    //           << std::endl;
 }
 
 void MomentumAgent::receiveMessage(const MessagePtr& msg) {
     const Timestamp currentTimestamp = simulation()->currentTimestamp();
 
     if (msg->type == "EVENT_SIMULATION_START") {
-        for (int i = 0; i < 1; ++i) {
-            simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_MOMENTUM", std::make_shared<EmptyPayload>());
-        }
+        simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_MOMENTUM", std::make_shared<EmptyPayload>());
     } else if (msg->type == "WAKEUP_FOR_MOMENTUM") {
         simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "RETRIEVE_L1", std::make_shared<EmptyPayload>());  
     } else if (msg->type == "RESPONSE_RETRIEVE_L1") {

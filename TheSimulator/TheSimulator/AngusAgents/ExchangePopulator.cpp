@@ -36,12 +36,12 @@ void ExchangePopulator::configure(const pugi::xml_node& node, const std::string&
         level_spacing = std::stod(simulation()->parameters().processString(att.as_string()));
     }
 
-    std::cout << "ExchangePopulator: " << name() << " configured with exchange: " << exchange
-              << ", initial_price: " << initial_price
-              << ", quantity_per_level: " << quantity_per_level
-              << ", num_levels_both_sides: " << num_levels_both_sides
-              << ", level_spacing: " << level_spacing
-              << std::endl;
+    // std::cout << "ExchangePopulator: " << name() << " configured with exchange: " << exchange
+    //           << ", initial_price: " << initial_price
+    //           << ", quantity_per_level: " << quantity_per_level
+    //           << ", num_levels_both_sides: " << num_levels_both_sides
+    //           << ", level_spacing: " << level_spacing
+    //           << std::endl;
 
 }
 

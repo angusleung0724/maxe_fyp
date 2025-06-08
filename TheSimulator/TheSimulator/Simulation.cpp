@@ -129,7 +129,7 @@ void Simulation::stop() {
 void Simulation::setupChildConfiguration(const pugi::xml_node& node, const std::string& configurationPath) {
 
 	// Change this to scale up population of agents without changing XML file (For experiments)
-	int population_scale = 1000;
+	int population_scale = 5000;
 
 	for (pugi::xml_node_iterator nit = node.begin(); nit != node.end(); ++nit) {
 		std::string nodeName = nit->name();

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <thread>
+#include <chrono>
 
 #include "Simulation.h"
 #include "SimulationException.h"
@@ -27,7 +28,7 @@ int main(int argc, char* argv[]) {
 
 	// handle the command line argument parsing
 	Dim::Cli cli;
-	auto& simulationFile = cli.opt<std::string>("f file [file]", "./TheSimulator/SimulationExample16.xml").desc("the simulation file to be used");
+	auto& simulationFile = cli.opt<std::string>("f file [file]", "./TheSimulator/SimulationExample1.xml").desc("the simulation file to be used");
 	auto& interactive = cli.opt<bool>("i interactive", false).desc("runs the simulation in the interactive mode");
 	auto& silencio = cli.opt<bool>("s silent", false).desc("supresses all verbose trace output, error traces remain enabled");
 	auto& runCount = cli.opt<unsigned int>("r runs", 1).desc("Number of times the simulation is to be run");
@@ -106,7 +107,11 @@ int main(int argc, char* argv[]) {
 			}
 
 			if (loads.size() == 1) {
+				auto start = std::chrono::high_resolution_clock::now();
 				runSimulations(loads.front(), *interactive, node, parameterBase);
+				auto end = std::chrono::high_resolution_clock::now();
+				std::chrono::duration<double> elapsed = end - start;
+                std::cout << "Duration: " << elapsed.count() << std::endl;
 			} else {
 				std::vector<std::unique_ptr<std::thread>> threads;
 				for (const auto& load : loads) {

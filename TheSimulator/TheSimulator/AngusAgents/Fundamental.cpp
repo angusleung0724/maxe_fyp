@@ -43,22 +43,20 @@ void FundamentalAgent::configure(const pugi::xml_node& node, const std::string& 
     // Initialize the normal distribution with the given mean and standard deviation
     normal_dist = std::normal_distribution<double>(fundamental_value_expectation, fundamental_value_std);
 
-    std::cout << "FundamentalAgent: " << name() << " configured with exchange_1: " << exchange_1
-              << ", fundamental_value_expectation: " << fundamental_value_expectation
-              << ", fundamental_value_std: " << fundamental_value_std
-              << ", k1: " << k1
-              << ", k2: " << k2
-              << ", num_fundamental_traders: " << num_fundamental_traders
-              << std::endl;
+    // std::cout << "FundamentalAgent: " << name() << " configured with exchange_1: " << exchange_1
+    //           << ", fundamental_value_expectation: " << fundamental_value_expectation
+    //           << ", fundamental_value_std: " << fundamental_value_std
+    //           << ", k1: " << k1
+    //           << ", k2: " << k2
+    //           << ", num_fundamental_traders: " << num_fundamental_traders
+    //           << std::endl;
 }
 
 void FundamentalAgent::receiveMessage(const MessagePtr& msg) {
     const Timestamp currentTimestamp = simulation()->currentTimestamp();
 
     if (msg->type == "EVENT_SIMULATION_START") {
-        for (int i = 0; i < 1; ++i) {
-            simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_FUNDAMENTAL", std::make_shared<EmptyPayload>());
-        }
+        simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_FUNDAMENTAL", std::make_shared<EmptyPayload>());
     } else if (msg->type == "WAKEUP_FOR_FUNDAMENTAL") {
         simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "RETRIEVE_L1", std::make_shared<EmptyPayload>());  
     } else if (msg->type == "RESPONSE_RETRIEVE_L1") {

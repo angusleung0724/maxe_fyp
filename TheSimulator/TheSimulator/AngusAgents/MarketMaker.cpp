@@ -48,9 +48,7 @@ void MarketMakerAgent::receiveMessage(const MessagePtr& msg) {
     const Timestamp currentTimestamp = simulation()->currentTimestamp();
 
     if (msg->type == "EVENT_SIMULATION_START") {
-        for (int i = 0; i < 1; ++i) {
-            simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_MARKET_MAKER", std::make_shared<EmptyPayload>());
-        }
+        simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_MARKET_MAKER", std::make_shared<EmptyPayload>());
     } else if (msg->type == "WAKEUP_FOR_MARKET_MAKER") {
         simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "RETRIEVE_L1", std::make_shared<EmptyPayload>());  
     } else if (msg->type == "RESPONSE_RETRIEVE_L1") {

@@ -36,12 +36,12 @@ void NoiseAgent::configure(const pugi::xml_node& node, const std::string& config
         sigma = std::stod(simulation()->parameters().processString(att.as_string()));
     }
 
-    std::cout << "NoiseAgent: " << name() << " configured with exchange_1: " << exchange_1
-              << ", cancel_probability: " << cancel_probability
-              << ", market_to_limit_ratio: " << market_to_limit_ratio
-              << ", num_noise_traders: " << num_noise_traders
-              << ", sigma: " << sigma
-              << std::endl;
+    // std::cout << "NoiseAgent: " << name() << " configured with exchange_1: " << exchange_1
+    //           << ", cancel_probability: " << cancel_probability
+    //           << ", market_to_limit_ratio: " << market_to_limit_ratio
+    //           << ", num_noise_traders: " << num_noise_traders
+    //           << ", sigma: " << sigma
+    //           << std::endl;
 }
 
 void NoiseAgent::receiveMessage(const MessagePtr& msg) {
@@ -49,9 +49,7 @@ void NoiseAgent::receiveMessage(const MessagePtr& msg) {
 
 
     if (msg->type == "EVENT_SIMULATION_START") {
-        for (int i = 0; i < 1; ++i) {
-            simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_NOISE", std::make_shared<EmptyPayload>());
-        }
+        simulation()->dispatchMessage(currentTimestamp, 0, name(), name(), "WAKEUP_FOR_NOISE", std::make_shared<EmptyPayload>());
     } else if (msg->type == "WAKEUP_FOR_NOISE") {
         simulation()->dispatchMessage(currentTimestamp, 1, name(), exchange_1, "RETRIEVE_L1", std::make_shared<EmptyPayload>());  
     } else if (msg->type == "RESPONSE_RETRIEVE_L1") {

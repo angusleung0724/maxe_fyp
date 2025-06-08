@@ -35,10 +35,10 @@ void DownwardShockAgent::configure(const pugi::xml_node& node, const std::string
         end_tick = std::stoull(simulation()->parameters().processString(att.as_string()));
     }
 
-    std::cout << "DownwardShockAgent: " << name() << " configured with exchange_1: " << exchange_1
-              << ", spike_probability: " << spike_probability
-              << ", volume_per_order: " << volume_per_order
-              << std::endl;
+    // std::cout << "DownwardShockAgent: " << name() << " configured with exchange_1: " << exchange_1
+    //           << ", spike_probability: " << spike_probability
+    //           << ", volume_per_order: " << volume_per_order
+    //           << std::endl;
 
 }
 
