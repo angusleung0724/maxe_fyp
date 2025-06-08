@@ -30,6 +30,6 @@ private:
   std::uniform_real_distribution<double> uniform_dist{0.0, 1.0};
   std::normal_distribution<double> normal_dist;
 
-  const uint64_t DEFAULT_ORDER_VOLUME = 100;
+  const uint64_t DEFAULT_ORDER_VOLUME = 25;
 
 };

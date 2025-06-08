@@ -33,6 +33,6 @@ class MarketMakerAgent : public Agent {
 
         std::uniform_real_distribution<double> uniform_dist{0.0, 1.0};
 
-        const uint64_t DEFAULT_ORDER_VOLUME = 100;
+        const uint64_t DEFAULT_ORDER_VOLUME = 25;
 
 };

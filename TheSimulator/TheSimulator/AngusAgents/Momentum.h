@@ -29,7 +29,7 @@ class MomentumAgent : public Agent {
         double beta;
         uint64_t num_momentum_traders;
 
-        const uint64_t DEFAULT_ORDER_VOLUME = 100;
+        const uint64_t DEFAULT_ORDER_VOLUME = 25;
         const double DEFAULT_OFFSET_FOR_LIMIT = 0.5; 
         std::uniform_real_distribution<double> uniform_dist{0.0, 1.0};
 
