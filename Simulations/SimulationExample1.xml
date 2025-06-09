@@ -10,7 +10,7 @@
         exchange_1="MARKET1"
         cancel_probability="0.3"
         market_to_limit_ratio="5.0"   
-        num_momentum_traders="100"
+        num_momentum_traders="10"
         demand_saturation="9.0"
         alpha="0.7"
         beta="0.02"
@@ -21,7 +21,7 @@
         exchange_1="MARKET1"
         cancel_probability="0.3"
         market_to_limit_ratio="5.0"
-        num_momentum_traders="100"
+        num_momentum_traders="10"
         demand_saturation="5.0"
         alpha="0.002"
         beta="0.001"
@@ -34,13 +34,13 @@
         fundamental_value_std="5.0"
         k1="5.0"
         k2="0.02"
-        num_fundamental_traders="100"
+        num_fundamental_traders="10"
         />
     
     <MarketMakerAgent
         name="MARKET_MAKER_AGENT"                      
         exchange_1="MARKET1" 
-        num_market_makers="100"
+        num_market_makers="10"
         limit_order_probability="0.6"
         cancel_probability="0.2"
         restart_interval="20"
@@ -53,31 +53,31 @@
         exchange_1="MARKET1"
         cancel_probability="0.3"
         market_to_limit_ratio="5.0"
-        num_noise_traders="100"
+        num_noise_traders="10"
         sigma="0.6"          
         />
     
     <DownwardShockAgent
         name="DOWNWARD_SHOCK_AGENT"                      
         exchange_1="MARKET1"  
-        spike_probability="0.8"
-        volume_per_order="400"
-        start_tick="500"
-        end_tick="550"
+        spike_probability="1"
+        volume_per_order="10000"
+        start_tick="800"
+        end_tick="850"
         />
 
     <ExchangePopulator
         name="EXCHANGE_POPULATOR"
         exchange="MARKET1"
         initial_price="50.0"
-        quantity_per_level="400"
-        num_levels_both_sides="500"
-        level_spacing="0.1"
+        quantity_per_level="100"
+        num_levels_both_sides="1000"
+        level_spacing="0.5"
         />
 
-    <!-- <TradeLogAgent                      
+    <TradeLogAgent                      
         name="LOGGER_TRADE"
         exchange="MARKET1"
-        /> -->
+        />
     
 </Simulation>
