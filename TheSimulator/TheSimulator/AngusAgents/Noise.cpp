@@ -118,6 +118,10 @@ void NoiseAgent::receiveMessage(const MessagePtr& msg) {
                 outstanding_orders.erase(it);
             }
         }
+
+    // We remove both of these from the outstanding orders as MAXE does not specify if the aggressing order 
+    // or the resting order is the one that is belonging to the agent who received the trade event. Removing
+    // both is the safest option and does not cause any significant complexity issues.
     } else if (msg->type == "RESPONSE_TRADE") {
         auto pptr = std::dynamic_pointer_cast<EventTradePayload>(msg->payload);
         auto it = std::find(outstanding_orders.begin(), outstanding_orders.end(), pptr->trade.aggressingOrderID());

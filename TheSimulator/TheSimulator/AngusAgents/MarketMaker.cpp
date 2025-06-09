@@ -128,11 +128,16 @@ void MarketMakerAgent::receiveMessage(const MessagePtr& msg) {
             curr_position -= trade.volume();
         }
 
+        // We remove both of these from the outstanding orders as MAXE does not specify if the aggressing order 
+        // or the resting order is the one that is belonging to the agent who received the trade event. Removing
+        // both is the safest option and does not cause any significant complexity issues.
+
         // Remove from outstanding orders
         auto it = std::find(outstanding_orders.begin(), outstanding_orders.end(), pptr->trade.aggressingOrderID());
         if (it != outstanding_orders.end()) {
             outstanding_orders.erase(it);
         }
+        // 
         auto it2 = std::find(outstanding_orders.begin(), outstanding_orders.end(), pptr->trade.restingOrderID());
         if (it2 != outstanding_orders.end()) {
             outstanding_orders.erase(it2);
